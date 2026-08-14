@@ -8,10 +8,8 @@ jobs:
     steps:
       - name: fetch the repo
         uses: actions/checkout@main
-      - name: welcome message
-        run: echo "My first github action"
-      - name: list files
-        run: ls
-      - name: show content
-        run: cat README.md
+      - name: run shell script
+        run: |
+          chmod +x wf1.sh
+          ./wf1.sh
      
