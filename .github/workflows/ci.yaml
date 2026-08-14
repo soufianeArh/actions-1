@@ -10,6 +10,6 @@ jobs:
         uses: actions/checkout@main
       - name: run shell script
         run: |
-          chmod +x wf1.sh
+          chmod +x ./wf1.sh
           ./wf1.sh
      
