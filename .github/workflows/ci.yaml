@@ -3,18 +3,32 @@ name: first workflow
 on: push
 
 jobs:
-  build:
+  build_job_1:
     runs-on: ubuntu-latest
     steps:
       - name: install cowsay
         run: sudo apt get install cowsay -y
 
-      - name: write cowsay to file 
+      - name: write cowsay to file
         run: cowsay "Hello from the runner!" > output.txt
 
       - name: sleep for 10 seconds
         run: sleep 10
-  test:
+  test_job_1: 
     runs-on: ubuntu-latest
-  deploy:
+    steps:
+      - name: sleep for 10
+        run: sleep 10
+
+      - name: Check if file exists
+        run: test -f output.txt
+
+      - name: Check if file contains "Hello"
+        run: grep -q "Hello" output.txt
+  deploy_job_1:
     runs-on: ubuntu-latest
+    steps:
+      - name: read the file
+        run: cat output.txt
+      - name: deploy the app
+        run: echo "deploying the app.."
