@@ -10,26 +10,40 @@ jobs:
         run: |
           sudo apt update
           sudo apt install cowsay -y
-      
       - name: write cowsay to file
         run: cowsay "Hello from the runner!" > output.txt
-
       - name: sleep for 10 seconds
         run: sleep 10
-  test_job_1: 
+      - name: upload output.txt
+        uses: actions/upload-artifact@v4
+        with:
+          name: cowsay-output
+          path: output.txt
+  test_job_2:
+    needs: build_job_1
     runs-on: ubuntu-latest
     steps:
       - name: sleep for 10
         run: sleep 10
+
+      - name: download output.txt
+        uses: actions/download-artifact@v4
+        with:
+          name: cowsay-output
 
       - name: Check if file exists
         run: test -f output.txt
 
       - name: Check if file contains "Hello"
         run: grep -q "Hello" output.txt
-  deploy_job_1:
+  deploy_job_3:
+    needs: test_job_2
     runs-on: ubuntu-latest
     steps:
+      - name: download output.txt
+        uses: actions/download-artifact@v4
+        with:
+          name: cowsay-output
       - name: read the file
         run: cat output.txt
       - name: deploy the app
