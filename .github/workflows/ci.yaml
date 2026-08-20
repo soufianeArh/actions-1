@@ -7,8 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: install cowsay
-        run: sudo apt get install cowsay -y
-
+        run: |
+          sudo apt update
+          sudo apt install cowsay -y
+      
       - name: write cowsay to file
         run: cowsay "Hello from the runner!" > output.txt
 
