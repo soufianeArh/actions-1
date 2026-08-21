@@ -5,13 +5,16 @@ on:
   #   - cron: "*/1 * * * *"
   workflow_dispatch:
 
-concurrency:
-  group: my-workflow
-  cancel-in-progress: true
+# concurrency:
+#   group: my-workflow
+#   cancel-in-progress: true
 
 jobs:
   build_job_1:
     runs-on: ubuntu-latest
+    concurrency:
+      group: build-job
+      cancel-in-progress: true
     steps:
       - name: install cowsay
         run: |
@@ -28,7 +31,7 @@ jobs:
           name: cowsay-output
           path: output.txt
       - name: sleep for 10min
-        run: sleep 600s
+        run: sleep 60s
   test_job_2:
     needs: build_job_1
     runs-on: ubuntu-latest
