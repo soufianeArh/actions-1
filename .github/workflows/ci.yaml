@@ -5,9 +5,9 @@ on:
   #   - cron: "*/1 * * * *"
   workflow_dispatch:
 
-# concurrency:
-#   group: my-workflow
-#   cancel-in-progress: true
+concurrency:
+  group: my-workflow
+  cancel-in-progress: false
 
 jobs:
   build_job_1:
