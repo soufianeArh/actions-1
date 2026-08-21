@@ -5,16 +5,16 @@ on:
   #   - cron: "*/1 * * * *"
   workflow_dispatch:
 
-concurrency:
-  group: my-workflow
-  cancel-in-progress: false
+# concurrency:
+#   group: my-workflow
+#   cancel-in-progress: false
 
 jobs:
   build_job_1:
     runs-on: ubuntu-latest
     concurrency:
       group: build-job
-      cancel-in-progress: true
+      cancel-in-progress: false
     steps:
       - name: install cowsay
         run: |
