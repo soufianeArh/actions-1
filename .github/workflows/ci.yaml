@@ -23,6 +23,8 @@ jobs:
         with:
           name: cowsay-output
           path: output.txt
+      - name: sleep for 10min
+        run: sleep 600s
   test_job_2:
     needs: build_job_1
     runs-on: ubuntu-latest
