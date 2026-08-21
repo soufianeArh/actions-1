@@ -1,9 +1,13 @@
 name: first workflow
 
 on:
-  schedule:
-    - cron: "*/1 * * * *"
+  # schedule:
+  #   - cron: "*/1 * * * *"
   workflow_dispatch:
+
+concurrency:
+  group: my-workflow
+  cancel-in-progress: true
 
 jobs:
   build_job_1:
