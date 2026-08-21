@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: install cowsay
         run: |
+          echo ${{secrets.DB_SECRET}}
           sudo apt update
           sudo apt install cowsay -y
       - name: write cowsay to file
