@@ -12,6 +12,7 @@ on:
 jobs:
   build_job_1:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     concurrency:
       group: build-job
       cancel-in-progress: false
@@ -31,7 +32,7 @@ jobs:
           name: cowsay-output
           path: output.txt
       - name: sleep for 10min
-        run: sleep 60s
+        run: sleep 600s
   test_job_2:
     needs: build_job_1
     runs-on: ubuntu-latest
